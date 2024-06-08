@@ -1,6 +1,8 @@
 # volta-docker
 An unofficial container for [Volta](https://volta.sh/): The Hassle-Free JavaScript Tool Manager
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/michaelr0/volta-docker/latest.yaml?label=build)
+
 ## Docker Images
 
 Source behind the following images:
