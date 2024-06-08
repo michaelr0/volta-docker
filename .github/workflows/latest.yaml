@@ -1,6 +1,7 @@
 name: Docker - latest
 
 on:
+  pull_request: null
   push:
     branches:
       - 'main'
