@@ -1,7 +1,10 @@
 name: Docker - latest
 
 on:
-  pull_request: null
+  pull_request:
+    paths:
+      - .github/workflows/latest.yaml
+      - 'latest/**'
   push:
     branches:
       - 'main'
