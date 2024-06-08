@@ -1,4 +1,4 @@
-FROM rust AS volta-binaries
+FROM rust:latest AS volta-binaries
 
 WORKDIR /volta
 
@@ -11,15 +11,16 @@ FROM ubuntu:24.04 AS volta-docker
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-COPY --from=volta-binaries /volta/target/release/volta* /usr/local/bin/
+ENV VOLTA_HOME="/opt/volta"
+ENV VOLTA_BIN_PATH="$VOLTA_HOME/bin"
+ENV PATH="$VOLTA_BIN_PATH:$PATH"
 
 RUN apt-get update && apt-get install curl -y && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ENV VOLTA_HOME="/opt/volta"
-ENV PATH="$VOLTA_HOME/bin:$PATH"
+COPY --from=volta-binaries /volta/target/release/volta* $VOLTA_BIN_PATH/
 
-RUN /usr/local/bin/volta setup
-RUN /usr/local/bin/volta install node@20
+RUN volta setup
+RUN volta install node@20
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
