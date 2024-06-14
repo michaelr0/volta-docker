@@ -11,8 +11,6 @@ RUN cargo build --release
 ## Build image
 FROM alpine:3 AS volta-docker
 
-ARG DEBIAN_FRONTEND=noninteractive
-
 ENV VOLTA_HOME="/opt/volta"
 ENV VOLTA_BIN_PATH="$VOLTA_HOME/bin"
 ENV PATH="$VOLTA_BIN_PATH:$PATH"
