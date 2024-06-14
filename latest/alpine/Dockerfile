@@ -2,7 +2,7 @@ FROM rust:alpine AS volta-binaries
 
 WORKDIR /volta
 
-RUN apk add git musl-dev
+RUN apk update && apk add git musl-dev
 
 RUN git clone --depth=1 https://github.com/volta-cli/volta .
 
@@ -11,13 +11,11 @@ RUN cargo build --release
 ## Build image
 FROM alpine:3 AS volta-docker
 
-ARG DEBIAN_FRONTEND=noninteractive
-
 ENV VOLTA_HOME="/opt/volta"
 ENV VOLTA_BIN_PATH="$VOLTA_HOME/bin"
 ENV PATH="$VOLTA_BIN_PATH:$PATH"
 
-RUN apk add curl
+RUN apk update && apk add curl
 
 COPY --from=volta-binaries /volta/target/release/volta* $VOLTA_BIN_PATH/
 
