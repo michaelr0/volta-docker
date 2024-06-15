@@ -22,7 +22,7 @@ COPY --from=volta-binaries /volta/target/release/volta* $VOLTA_BIN_PATH/
 RUN volta setup
 RUN volta install node@20
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY shared/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 WORKDIR /app
