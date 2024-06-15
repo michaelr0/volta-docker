@@ -33,4 +33,4 @@ jobs:
             # but it still prints what would be created
             #
             # Configure everything, make sure it does what expected and set it to `true`
-            yes-create-issues: true
+            yes-create-issues: ${{ github.event_name != 'pull_request' }}
