@@ -1,0 +1,37 @@
+name: Check for new Volta releases
+
+on:
+  schedule:
+    # Run every day
+    - cron: '0 0 * * *'
+
+jobs:
+  monitor-volta-releases:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: poll-github-repo/action@v1
+        with:
+            repo-to-sync: volta-cli/volta
+            path-to-sync: RELEASES.md
+
+            cache-path: .monitor/volta/RELEASES.md.last-sync
+
+            # Label that is added to every created issue
+            #tracking-issue-label:
+
+            # Template for tracking issue title (see available placeholders below)
+            tracking-issue-title: "New volta-cli/volta release: {{ sha-short }}"
+
+            # Template for tracking issue body (see available placeholders below)
+            tracking-issue-body: |
+                New [release]({{ url }}) in [volta-cli/volta](https://github.com/volta-cli/volta)
+
+            token: ${{ secrets.GITHUB_TOKEN }}
+
+            # Special boolean flag that simplifies initial setup
+            #
+            # When set to `false` the action doesn't do any issues/commit creation,
+            # but it still prints what would be created
+            #
+            # Configure everything, make sure it does what expected and set it to `true`
+            yes-create-issues: true
