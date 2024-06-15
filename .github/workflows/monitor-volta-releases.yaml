@@ -1,4 +1,4 @@
-name: Monitor Upstream Volta
+name: Check for new Volta releases
 
 on:
   pull_request: null
@@ -7,27 +7,26 @@ on:
     - cron: '0 0 * * *'
 
 jobs:
-  monitor-upstream-volta:
+  monitor-volta-releases:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout3
-        uses: poll-github-repo/action@v1
+      - uses: poll-github-repo/action@v1
         with:
             # Repository you want to track
             # Must have a format "owner/repo" (like "facebook/react")
             repo-to-sync: volta-cli/volta
 
             # Path to the file in <repo-to-sync> that you want to track
-            path-to-sync: .git/FETCH_HEAD
+            path-to-sync: RELEASES.md
 
             # Path to a local file that stores timestamps of the last check in ISO format.
             # This is required to check only a small subset of changes on every run.
             # NOTE: this file MUST exist before the action runs
             # 2022-03-18T00:33:40Z is an example of what it could contain
-            cache-path: .monitor/volta/FETCH_HEAD.last-sync
+            cache-path: .monitor/volta/RELEASES.md.last-sync
 
             # Label that is added to every created issue
-            tracking-issue-label: upstream-volta-updated
+            tracking-issue-label:
 
             # Template for tracking issue title (see available placeholders below)
             tracking-issue-title: "Update on {{ path }}: {{ sha-short }}"
