@@ -7,11 +7,14 @@ An unofficial container for [Volta](https://volta.sh/): The Hassle-Free JavaScri
 
 ## Docker Images
 
-Source behind the following images:
-
 - DockerHub https://hub.docker.com/r/michaelr0/volta-docker
 
-Docker Hub documentation can be found at https://github.com/docker-library/docs/tree/master/composer
+```
+michaelr0/volta-docker:latest - Ubuntu image, currently built from compiling volta-cli/volta
+michaelr0/volta-docker:alpine - Alpine image, currently built from compiling volta-cli/volta
+michaelr0/volta-docker:nightly-ubuntu - Ubuntu image, compiled from volta-cli/volta
+michaelr0/volta-docker:nightly-alpine - Alpine image, compiled from volta-cli/volta
+```
 
 ## How to use this image
 
