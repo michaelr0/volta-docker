@@ -47,7 +47,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: nightly/ubuntu/Dockerfile
+          file: nightly/Dockerfile-ubuntu
           platforms: ${{ env.PLATFORMS }}
           tags: |
             ${{ github.repository }}:nightly
@@ -80,7 +80,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: nightly/alpine/Dockerfile
+          file: nightly/Dockerfile-alpine
           platforms: ${{ env.PLATFORMS }}
           tags: |
             ${{ github.repository }}:nightly-alpine
